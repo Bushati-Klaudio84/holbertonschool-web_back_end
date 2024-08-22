@@ -4,7 +4,10 @@
 
 SELECT 
     name AS band_name,
-    IFNULL(YEAR(CURDATE()) - formed, 0) - IFNULL(YEAR(CURDATE()) - split, 0) AS lifespan
+    CASE
+        WHEN split IS NOT NULL THEN YEAR(split) - YEAR(formed)
+        ELSE YEAR(CURDATE()) - YEAR(formed)
+    END AS lifespan
 FROM 
     bands
 WHERE 
