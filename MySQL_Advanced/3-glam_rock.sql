@@ -1,10 +1,13 @@
--- Select the relevant bands and compute their lifespan
+
+
+-- Assuming the table name is 'bands' and the relevant columns are 'name', 'formed', 'split', and 'style'
+
 SELECT 
     name AS band_name,
-    IF(split IS NULL, YEAR(CURDATE()) - formed, split - formed) AS lifespan
+    IFNULL(YEAR(CURDATE()) - formed, 0) - IFNULL(YEAR(CURDATE()) - split, 0) AS lifespan
 FROM 
-    holberton.bands
+    bands
 WHERE 
     style = 'Glam rock'
 ORDER BY 
-    lifespan DESC, band_name ASC;
+    lifespan DESC;
