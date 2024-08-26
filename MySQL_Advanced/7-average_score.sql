@@ -1,3 +1,6 @@
+-- Set the delimiter to $$ to avoid issues with semicolons
+
+
 DELIMITER //
 
 CREATE PROCEDURE ComputeAverageScoreForUser(IN user_id INT)
